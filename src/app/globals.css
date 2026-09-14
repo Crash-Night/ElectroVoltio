@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/* ElectroVoltio Theme Variables */
+:root {
+  --ev-bg: #f8fafc;
+  --ev-surface: #ffffff;
+  --ev-border: #e2e8f0;
+  --ev-text: #1e293b;
+  --ev-text-secondary: #64748b;
+  --ev-primary: #3b82f6;
+  --ev-primary-hover: #2563eb;
+  --ev-success: #22c55e;
+  --ev-warning: #f59e0b;
+  --ev-danger: #ef4444;
+  --ev-critical: #dc2626;
+  --ev-canvas-bg: #f1f5f9;
+  --ev-grid: #cbd5e1;
+  --ev-component-bg: #ffffff;
+  --ev-component-border: #94a3b8;
+  --ev-selected: #3b82f6;
+  --ev-wire: #8B4513;
+  --ev-phase: #8B4513;
+  --ev-energized: #22c55e;
+  --ev-deenergized: #94a3b8;
+  --ev-tripped: #ef4444;
+  --ev-overload: #f59e0b;
+  --ev-fault: #dc2626;
+  --ev-neutral: #6DB7E8;
+  --ev-pe: #2E7D32;
+  --ev-pe-yellow: #F2C94C;
+}
+
+[data-theme="dark"] {
+  --ev-bg: #0f172a;
+  --ev-surface: #1e293b;
+  --ev-border: #334155;
+  --ev-text: #e2e8f0;
+  --ev-text-secondary: #94a3b8;
+  --ev-canvas-bg: #0f172a;
+  --ev-grid: #1e293b;
+  --ev-component-bg: #1e293b;
+  --ev-component-border: #475569;
+  --ev-wire: #B87333;
+  --ev-phase: #B87333;
+  --ev-neutral: #8AC7EA;
+  --ev-pe: #4CAF50;
+  --ev-pe-yellow: #F4D35E;
+}
+
+/* Base styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--ev-bg);
+  color: var(--ev-text);
+}
+
+#__next {
+  height: 100%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ev-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ev-text-secondary);
+}
+
+/* Component SVG styles */
+.component-group {
+  cursor: pointer;
+  transition: filter 0.1s ease;
+}
+.component-group:hover {
+  filter: brightness(1.05);
+}
+.component-group.selected {
+  filter: drop-shadow(0 0 4px var(--ev-selected));
+}
+
+/* Terminal dots */
+.terminal-dot {
+  cursor: crosshair;
+  transition: r 0.15s ease, fill 0.15s ease;
+}
+.terminal-dot:hover {
+  r: 6;
+}
+
+/* Cable paths */
+.cable-path {
+  cursor: pointer;
+  transition: stroke-width 0.1s ease;
+}
+.cable-path:hover {
+  stroke-width: 3;
+}
+
+/* Animation for tripped devices */
+@keyframes blink-trip {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.trip-blink {
+  animation: blink-trip 1s infinite;
+}
+
+/* Pulse animation for energized */
+@keyframes pulse-energized {
+  0%, 100% { filter: none; }
+  50% { filter: drop-shadow(0 0 3px var(--ev-energized)); }
+}
+.energized-pulse {
+  animation: pulse-energized 2s infinite;
+}
+
+@keyframes smoke-blink {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #f97316); }
+  50% { opacity: 0.35; filter: drop-shadow(0 0 14px #fb923c); }
+}
+.smoke-alert {
+  animation: smoke-blink 0.55s infinite;
+}
+
+@keyframes doorbell-pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px #6366f1); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 12px #818cf8); }
+}
+.doorbell-active {
+  animation: doorbell-pulse 0.45s infinite;
+}
